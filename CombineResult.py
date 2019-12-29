@@ -4,14 +4,15 @@ Created on Sun Dec 29 12:28:47 2019
 
 @author: Lab-722
 """
-
+import time
 import pandas as pd
 import numpy as np
 from pathlib import Path
 
 # Manual path
-directory_path = r"C:\Users\Lab-722\Desktop\ReadyForCombine\20191228\Japanese_Bankrupt"
-dataset_name = "Japanese_Bankrupt"
+dataset_name = "Australian_Original"
+directory_path = r"C:\Users\Lab-722\Desktop\ReadyForCombine\20191228\Australian_Original"
+
 
 # Load File Path for combine
 xlsxpath = []
@@ -33,6 +34,8 @@ for result_path in xlsxpath:
         gap_baseline_dataframe = pd.DataFrame(columns=[coloumn_names[i]+' Gap',coloumn_names[i]+' Gap > 5%'])
         for idx,value in enumerate(dataSource[coloumn_names[i]]):
             gap_baseline = value -dataSource[coloumn_names[i]][0]
+            if coloumn_names[i] =='TypeI' or coloumn_names[i] =='TypeII':
+                gap_baseline = -gap_baseline
             gap_baseline_bigger_than_5_percent = ""
             if gap_baseline>=0.05:
                 gap_baseline_bigger_than_5_percent = "Positive"
@@ -53,7 +56,10 @@ full_dataset_result.reset_index()
 #dataSource.insert(0, 'Classifier', )
 # Add Column(Function Name & Difference to Baseline & Baseline>5% )
 
-
+file_time = time.strftime("%Y-%m-%d-%H%M%S", time.localtime()) 
+file_name = "CombineResult_{dataset_name}_{file_timeA}.xlsx".format(
+        file_timeA = file_time,dataset_name=dataset_name)
+pd.DataFrame(full_dataset_result).to_excel("CombineResult/"+file_name)
 
 #dataSource[""]
 
