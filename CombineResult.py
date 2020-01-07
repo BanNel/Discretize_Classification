@@ -10,8 +10,8 @@ import numpy as np
 from pathlib import Path
 
 # Manual path
-dataset_name = "Australian_Original"
-directory_path = r"C:\Users\Lab-722\Desktop\ReadyForCombine\20191228\Australian_Original"
+dataset_name = "USA_Bankrupt"
+directory_path = r"C:\Users\Lab-722\Desktop\ReadyForCombine\20190104\USA_Bankrupt"
 
 
 # Load File Path for combine
